@@ -3,11 +3,11 @@
 # imports
 import numpy as np
 from scipy.stats import random_correlation
-from statsmodels.tsa.tsatools import add_lag
+from scipy.signal import find_peaks
 import random
 
 # helper functions
-def make_eigs(size:int, rand_factor = 2):
+def make_eigs(size: int, rand_factor = 2):
     """Creates tuple of size n, where length is equal to size and sum is equal to size
     
     Parameters
@@ -30,11 +30,12 @@ def make_eigs(size:int, rand_factor = 2):
         val = idx/bank
         eigs.append(val)
         bank -= 1
+        
     eigs.append(size - sum(eigs))
 
     return(tuple(eigs))
 
-def make_rand_corrmat(size:int):
+def make_rand_corrmat(size: int):
     """Generates random correlation matrix
     
     Parameters
@@ -52,3 +53,6 @@ def make_rand_corrmat(size:int):
     X = random_correlation.rvs(eigs=e, random_state=rng)
 
     return(X)
+
+def add_noise(factor):
+    """"""
